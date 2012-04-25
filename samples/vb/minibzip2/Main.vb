@@ -172,11 +172,7 @@ Public Class MainForm
 
 			fsOutput = File.Create(strOutputFilename)
 
-			BZip2.Decompress(fsBZ2Archive, fsOutput, False)
-
-			fsBZ2Archive.Close()
-			fsOutput.Flush()
-			fsOutput.Close()
+			BZip2.Decompress(fsBZ2Archive, fsOutput, True)
 		Else
 			'Compression of single-file archive
 			Dim fsInputFile As FileStream, fsBZ2Archive As FileStream
@@ -184,9 +180,6 @@ Public Class MainForm
 			fsBZ2Archive = File.Create(txtFileName.Text + ".bz")
 
 			BZip2.Compress(fsInputFile, fsBZ2Archive, True, 9)
-
-			fsInputFile.Close()
-			' fsBZ2Archive.Flush() & fsBZ2Archive.Close() are automatically called by .Compress
 		End If
 	End Sub
 
